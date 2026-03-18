@@ -6,7 +6,7 @@ export function renderApprovalsPage() {
       <div>
         <div class="hero__eyebrow">Approvals / Governance</div>
         <h1 class="page-title">把高风险动作集中到一个中心，而不是散落在各处。</h1>
-        <p class="page-desc">这一页继续承接 mission-control 与 control-center 的治理逻辑，后续可接真实审批对象和操作日志。</p>
+        <p class="page-desc">这一页继续承接 mission-control 与 control-center 的治理逻辑，开始走向可操作面板。</p>
       </div>
       <span class="tag">3 Pending</span>
     </section>
@@ -17,12 +17,16 @@ export function renderApprovalsPage() {
           <div><h2>待审批列表</h2><p>统一收拢写入、覆盖、同步这类高风险动作。</p></div></div>
           <div class="approval-list">
             ${approvals.map((item) => `
-              <div class="approval-item glass-card glass-card--soft">
+              <div class="approval-item glass-card glass-card--soft approval-item--actionable">
                 <div>
                   <strong>${item.title}</strong>
                   <p>负责人：${item.owner}</p>
                 </div>
-                <span class="tag tag--warn">${item.level}</span>
+                <div class="approval-actions">
+                  <span class="tag tag--warn">${item.level}</span>
+                  <button class="quick-action">批准</button>
+                  <button class="quick-action">驳回</button>
+                </div>
               </div>
             `).join('')}
           </div>

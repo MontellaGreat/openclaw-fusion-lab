@@ -1,5 +1,6 @@
 import { renderTopbar } from './components/topbar.js'
 import { bindLiveStatus } from './components/liveStatus.js'
+import { bindTaskDrawer } from './components/taskDrawer.js'
 import { renderStarOfficePage } from './pages/starOfficePage.js'
 import { renderOverviewPage } from './pages/overviewPage.js'
 import { renderMissionsPage } from './pages/missionsPage.js'
@@ -86,9 +87,8 @@ export function renderApp() {
     const activeRoute = getRoute()
     app.innerHTML = renderShell(activeRoute)
     bindRouteEvents()
-    if (activeRoute === 'overview') {
-      bindLiveStatus()
-    }
+    if (activeRoute === 'overview') bindLiveStatus()
+    if (activeRoute === 'missions') bindTaskDrawer()
   }
 
   window.addEventListener('hashchange', paint)
