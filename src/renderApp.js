@@ -8,6 +8,7 @@ import { renderUsagePage } from './pages/usagePage.js'
 import { renderWorkspacePage } from './pages/workspacePage.js'
 import { renderApprovalsPage } from './pages/approvalsPage.js'
 import { renderCollaborationPage } from './pages/collaborationPage.js'
+import { renderDesignSystemPage } from './pages/designSystemPage.js'
 
 const routes = [
   { id: 'star-office', label: 'Star Office', badge: 'Home', render: renderStarOfficePage },
@@ -18,6 +19,7 @@ const routes = [
   { id: 'approvals', label: '审批中心', badge: '3', render: renderApprovalsPage },
   { id: 'collaboration', label: '协作链路', badge: '9', render: renderCollaborationPage },
   { id: 'workspace', label: '工作台', badge: 'Docs', render: renderWorkspacePage },
+  { id: 'design-system', label: '设计系统', badge: 'UX', render: renderDesignSystemPage },
 ]
 
 function getRoute() {
