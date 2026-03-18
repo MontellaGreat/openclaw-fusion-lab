@@ -48,11 +48,11 @@ export const pipeline = [
 ]
 
 export const agents = [
-  { name: '主 Agent / 墨影', role: '总控、复核、审批决策', load: 78, area: '中枢台', status: 'Busy', score: 'S', tasks: 7 },
-  { name: 'UI / UX Agent', role: '页面设计、组件重构、可视化布局', load: 63, area: '设计区', status: 'Working', score: 'A+', tasks: 5 },
-  { name: '运营 Agent', role: '线索整理、日报、投放复盘', load: 41, area: '协作区', status: 'Researching', score: 'A', tasks: 4 },
-  { name: '数据 Agent', role: '统计、报表、异常值监控', load: 54, area: '分析区', status: 'Syncing', score: 'A', tasks: 6 },
-  { name: '审校 Agent', role: '文案质检、稿件复核、风险措辞检查', load: 35, area: '审校区', status: 'Idle', score: 'B+', tasks: 2 },
+  { id: 'main', name: '主 Agent / 墨影', role: '总控、复核、审批决策', load: 78, area: '中枢台', status: 'busy', score: 'S', tasks: 7, persona: '冷静总控', avatar: '/avatars/avatar-1.jpg', queue: '审批 2 项', stateLabel: '真实工作中' },
+  { id: 'ui-ux-agent', name: 'UI / UX Agent', role: '页面设计、组件重构、可视化布局', load: 63, area: '设计区', status: 'working', score: 'A+', tasks: 5, persona: '界面设计师', avatar: '/avatars/avatar-2.jpg', queue: '待接 1 项', stateLabel: '真实工作中' },
+  { id: 'ops-agent', name: '运营 Agent', role: '线索整理、日报、投放复盘', load: 41, area: '协作区', status: 'researching', score: 'A', tasks: 4, persona: '运营分析', avatar: '/avatars/avatar-3.jpg', queue: '待接 2 项', stateLabel: '排队准备中' },
+  { id: 'data-agent', name: '数据 Agent', role: '统计、报表、异常值监控', load: 54, area: '分析区', status: 'syncing', score: 'A', tasks: 6, persona: '数据整理', avatar: '/avatars/avatar-4.jpg', queue: '待复核 1 项', stateLabel: '真实工作中' },
+  { id: 'review-agent', name: '审校 Agent', role: '文案质检、稿件复核、风险措辞检查', load: 35, area: '审校区', status: 'idle', score: 'B+', tasks: 2, persona: '质量把关', avatar: '/avatars/avatar-2.jpg', queue: '空闲可接单', stateLabel: '待命中' },
 ]
 
 export const events = [
@@ -83,9 +83,9 @@ export const workspaceDocs = [
 ]
 
 export const approvals = [
-  { title: '写入共享文档库', level: 'High Risk', owner: 'main' },
-  { title: '批量覆盖旧海报素材', level: 'Medium Risk', owner: 'visual-agent' },
-  { title: '同步外部数据到工作台', level: 'Review', owner: 'data-agent' },
+  { title: '写入共享文档库', level: 'High Risk', owner: 'main', status: 'pending' },
+  { title: '批量覆盖旧海报素材', level: 'Medium Risk', owner: 'visual-agent', status: 'pending' },
+  { title: '同步外部数据到工作台', level: 'Review', owner: 'data-agent', status: 'pending' },
 ]
 
 export const quickActions = [
