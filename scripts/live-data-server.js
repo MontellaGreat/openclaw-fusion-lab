@@ -35,7 +35,7 @@ function getSessions() {
       .map((name) => {
         const full = path.join(base, name)
         const stat = fs.statSync(full)
-        return { name, size: stat.size, mtime: stat.mtimeMs }
+        return { id: name.replace('.jsonl', ''), name, size: stat.size, mtime: stat.mtimeMs }
       })
       .sort((a, b) => b.mtime - a.mtime)
       .slice(0, 10)
@@ -46,27 +46,63 @@ function getSessions() {
 
 function getTasks() {
   return [
-    { id: 'task-1', title: '政府宣传页重构', stage: '待澄清', owner: 'main' },
-    { id: 'task-2', title: '官网落地页设计', stage: '执行中', owner: 'ui-ux-agent' },
-    { id: 'task-3', title: '短片镜头清单', stage: '待交付', owner: 'main' },
+    { id: 'task-1', title: '政府宣传页重构', stage: '待澄清', owner: 'main', priority: 'High', eta: 'Today' },
+    { id: 'task-2', title: '官网落地页设计', stage: '执行中', owner: 'ui-ux-agent', priority: 'High', eta: 'Today' },
+    { id: 'task-3', title: '短片镜头清单', stage: '待交付', owner: 'main', priority: 'Medium', eta: 'Tomorrow' },
   ]
 }
 
 function getApprovals() {
   return [
-    { id: 'approval-1', title: '写入共享文档库', owner: 'main', level: 'High Risk' },
-    { id: 'approval-2', title: '覆盖旧海报素材', owner: 'visual-agent', level: 'Medium Risk' },
+    { id: 'approval-1', title: '写入共享文档库', owner: 'main', level: 'High Risk', status: 'pending' },
+    { id: 'approval-2', title: '覆盖旧海报素材', owner: 'visual-agent', level: 'Medium Risk', status: 'pending' },
   ]
+}
+
+function getAgents() {
+  return [
+    { id: 'main', name: '主 Agent / 墨影', status: 'busy', load: 78 },
+    { id: 'ui-ux-agent', name: 'UI / UX Agent', status: 'working', load: 63 },
+    { id: 'ops-agent', name: '运营 Agent', status: 'researching', load: 41 },
+  ]
+}
+
+function getFlows() {
+  return [
+    { from: 'main', to: 'ui-ux-agent', label: '派发页面改版' },
+    { from: 'ui-ux-agent', to: 'review-agent', label: '进入审校' },
+    { from: 'review-agent', to: 'main', label: '返回审议' },
+  ]
+}
+
+function getSummary(status, sessions, tasks, approvals, agents) {
+  return {
+    gateway: status.live ? 'live' : 'down',
+    sessions: sessions.length,
+    tasks: tasks.length,
+    approvals: approvals.filter((item) => item.status === 'pending').length,
+    agents: agents.length,
+  }
 }
 
 const server = http.createServer((req, res) => {
   if (req.url === '/api/live') {
     const raw = getOpenClawStatusText()
+    const status = parseOpenClawStatus(raw)
+    const sessions = getSessions()
+    const tasks = getTasks()
+    const approvals = getApprovals()
+    const agents = getAgents()
+    const flows = getFlows()
+
     const payload = {
-      status: parseOpenClawStatus(raw),
-      sessions: getSessions(),
-      tasks: getTasks(),
-      approvals: getApprovals(),
+      status,
+      sessions,
+      tasks,
+      approvals,
+      agents,
+      flows,
+      summary: getSummary(status, sessions, tasks, approvals, agents),
       now: new Date().toISOString(),
     }
     res.writeHead(200, {

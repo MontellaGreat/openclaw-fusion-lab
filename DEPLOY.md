@@ -15,6 +15,16 @@
 - `4180`：OpenClaw 实时数据桥
 - `80/443`：Nginx 统一入口与反向代理
 
+## 当前数据层
+`/api/live` 目前已经返回：
+- `status`
+- `sessions`
+- `tasks`
+- `approvals`
+- `agents`
+- `flows`
+- `summary`
+
 ## 当前说明
 - HTTPS 目前为自签证书，因为只有 IP，没有域名，无法签发受信任证书
 - 如果后续提供域名，可替换为正式证书

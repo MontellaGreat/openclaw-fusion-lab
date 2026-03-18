@@ -12,6 +12,7 @@ export function renderLiveStatusBlock() {
         <article class="metric-card glass-card glass-card--soft"><div class="metric-card__label">Gateway</div><div class="metric-card__value">--</div><div class="metric-card__hint">加载中</div></article>
         <article class="metric-card glass-card glass-card--soft"><div class="metric-card__label">Feishu</div><div class="metric-card__value">--</div><div class="metric-card__hint">加载中</div></article>
         <article class="metric-card glass-card glass-card--soft"><div class="metric-card__label">Sessions</div><div class="metric-card__value">--</div><div class="metric-card__hint">加载中</div></article>
+        <article class="metric-card glass-card glass-card--soft"><div class="metric-card__label">Tasks</div><div class="metric-card__value">--</div><div class="metric-card__hint">加载中</div></article>
       </div>
       <div class="live-status-grid">
         <div class="live-card glass-card glass-card--soft">
@@ -37,11 +38,13 @@ export function bindLiveStatus() {
     .then((response) => response.json())
     .then((data) => {
       const status = data?.status || {}
+      const summary = data?.summary || {}
       textEl.textContent = status.raw || '暂无状态'
       metricGrid.innerHTML = `
-        <article class="metric-card glass-card glass-card--soft"><div class="metric-card__label">Gateway</div><div class="metric-card__value">${status.live ? 'Live' : 'Down'}</div><div class="metric-card__hint ${status.live ? 'metric-card__hint--up' : 'metric-card__hint--danger'}">真实环境</div></article>
+        <article class="metric-card glass-card glass-card--soft"><div class="metric-card__label">Gateway</div><div class="metric-card__value">${summary.gateway === 'live' ? 'Live' : 'Down'}</div><div class="metric-card__hint ${summary.gateway === 'live' ? 'metric-card__hint--up' : 'metric-card__hint--danger'}">真实环境</div></article>
         <article class="metric-card glass-card glass-card--soft"><div class="metric-card__label">Feishu</div><div class="metric-card__value">${status.hasFeishu ? 'ON' : 'OFF'}</div><div class="metric-card__hint">渠道状态</div></article>
-        <article class="metric-card glass-card glass-card--soft"><div class="metric-card__label">Sessions</div><div class="metric-card__value">${status.sessionCount ?? 0}</div><div class="metric-card__hint">当前识别到的会话</div></article>
+        <article class="metric-card glass-card glass-card--soft"><div class="metric-card__label">Sessions</div><div class="metric-card__value">${summary.sessions ?? 0}</div><div class="metric-card__hint">当前识别到的会话</div></article>
+        <article class="metric-card glass-card glass-card--soft"><div class="metric-card__label">Tasks</div><div class="metric-card__value">${summary.tasks ?? 0}</div><div class="metric-card__hint">当前任务对象</div></article>
       `
 
       const sessions = Array.isArray(data?.sessions) ? data.sessions : []

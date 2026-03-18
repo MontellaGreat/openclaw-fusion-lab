@@ -13,20 +13,21 @@ export function renderIntegrationPage() {
       <article class="panel glass-card panel--wide">
         <div class="panel__header"><div><h2>当前项目</h2><p>先把我们已经做成的接线说清楚。</p></div></div>
         <div class="todo-list">
-          <div class="todo-item">Nginx 统一入口：`/`、`/star-office/`、`/api/live`</div>
+          <div class="todo-item">Nginx 统一入口：/、/star-office/、/api/live</div>
           <div class="todo-item">Star Office 原项目：19000</div>
           <div class="todo-item">融合控制台：4174</div>
           <div class="todo-item">OpenClaw 数据桥：4180</div>
           <div class="todo-item">真实状态来源：openclaw status + sessions 文件</div>
+          <div class="todo-item">对象化接口：tasks / approvals / agents / flows / summary</div>
         </div>
       </article>
 
       <article class="panel glass-card">
         <div class="panel__header"><div><h2>下一步路线</h2><p>从观察层走向平台对象层。</p></div></div>
         <div class="todo-list">
-          <div class="todo-item">补 task object</div>
-          <div class="todo-item">补 approval object</div>
-          <div class="todo-item">补 agent object</div>
+          <div class="todo-item">补 task object store</div>
+          <div class="todo-item">补 approval action handler</div>
+          <div class="todo-item">补 agent discovery</div>
           <div class="todo-item">补 gateway runtime client</div>
         </div>
       </article>
