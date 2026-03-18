@@ -9,7 +9,7 @@ export function renderMissionsPage() {
       <div>
         <div class="hero__eyebrow">Missions / Full Pipeline</div>
         <h1 class="page-title">任务从澄清到交付，整条链路一次看清。</h1>
-        <p class="page-desc">这一页重点承接 Mission Control 的任务全生命周期、审批阻塞、实时事件和交付链路。</p>
+        <p class="page-desc">继续向真实任务系统靠拢：状态、详情、审批、事件，尽量都放进一个完整面板体系。</p>
       </div>
       <span class="tag">31 Active</span>
     </section>

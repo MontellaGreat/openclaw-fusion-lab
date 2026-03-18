@@ -6,7 +6,7 @@ export function renderUsagePage() {
       <div>
         <div class="hero__eyebrow">Usage / Token / Cost</div>
         <h1 class="page-title">看消耗，不只是看数字，而是看风险和调度策略。</h1>
-        <p class="page-desc">这一页承接 control-center 的 usage 体系和 AgentTeamsBI 的日历 / 用量感知。</p>
+        <p class="page-desc">这一页承接 control-center 的 usage 体系和 AgentTeamsBI 的用量感知，并继续向 BI 视图靠拢。</p>
       </div>
       <span class="tag">This Month</span>
     </section>

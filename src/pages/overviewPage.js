@@ -1,4 +1,4 @@
-import { metrics, pipeline, agents, events } from '../data/mockData.js'
+import { agents, approvals, events, metrics, pipeline } from '../data/mockData.js'
 
 export function renderOverviewPage() {
   return `
@@ -6,7 +6,7 @@ export function renderOverviewPage() {
       <div class="hero__copy">
         <div class="hero__eyebrow">Overview / Glass Control Center</div>
         <h1>把黑盒 Agent 系统，做成真正能看、能控、能判断的玻璃拟态运营中枢。</h1>
-        <p>这一版继续沿着默认融合版推进：控制中心、任务编排、Agent 运营和空间状态层统一成一套产品语言。</p>
+        <p>这版继续往“可部署演示版”推进：首页回答现在系统怎样、哪件事该先处理、谁需要被调度，而不是先把数据堆给你。</p>
         <div class="hero__actions">
           <button class="btn btn--primary">启动调度中心</button>
           <button class="btn btn--ghost">查看风险摘要</button>
@@ -52,6 +52,7 @@ export function renderOverviewPage() {
                 <article class="task-card">
                   <strong>${card.title}</strong>
                   <p>${card.desc}</p>
+                  <div class="task-card__meta">${card.priority} · ${card.owner} · ETA ${card.eta}</div>
                 </article>
               `).join('')}
             </section>
@@ -62,10 +63,23 @@ export function renderOverviewPage() {
       <article class="panel-stack">
         <section class="panel glass-card">
           <div class="panel__header">
+            <div><h2>待审批</h2><p>把高风险与阻塞项放在首页就能先看到。</p></div></div>
+          <div class="approval-list compact-list">
+            ${approvals.slice(0, 3).map((item) => `
+              <div class="approval-item glass-card glass-card--soft">
+                <div><strong>${item.title}</strong><p>${item.owner}</p></div>
+                <span class="tag tag--warn">${item.level}</span>
+              </div>
+            `).join('')}
+          </div>
+        </section>
+
+        <section class="panel glass-card">
+          <div class="panel__header">
             <div><h2>实时事件流</h2><p>给排障、复盘和审计留证据。</p></div>
           </div>
           <div class="event-list">
-            ${events.map(([text, time]) => `
+            ${events.slice(0, 5).map(([text, time]) => `
               <div class="event-item">
                 <span class="event-item__dot"></span>
                 <div class="event-item__text">${text}</div>
@@ -74,26 +88,37 @@ export function renderOverviewPage() {
             `).join('')}
           </div>
         </section>
+      </article>
+    </section>
 
-        <section class="panel glass-card">
-          <div class="panel__header">
-            <div><h2>核心 Agent</h2><p>只显示当前最该看的 Agent。</p></div>
-          </div>
-          <div class="agent-grid compact-grid">
-            ${agents.slice(0, 3).map((agent, index) => `
-              <article class="agent-card glass-card glass-card--soft">
-                <div class="agent-card__avatar">${['M', 'UI', 'OP'][index]}</div>
-                <div class="agent-card__body">
-                  <strong>${agent.name}</strong>
-                  <p>${agent.role}</p>
-                  <div class="agent-card__meta">${agent.area}</div>
-                  <div class="progress"><span style="width:${agent.load}%"></span></div>
-                </div>
-                <div class="agent-card__load">${agent.load}%</div>
-              </article>
-            `).join('')}
-          </div>
-        </section>
+    <section class="content-grid content-grid--bottom">
+      <article class="panel glass-card panel--wide">
+        <div class="panel__header">
+          <div><h2>关键 Agent</h2><p>只展示现在最该盯的三个角色，避免首页过载。</p></div></div>
+        <div class="agent-grid compact-grid three-col-grid">
+          ${agents.slice(0, 3).map((agent, index) => `
+            <article class="agent-card glass-card glass-card--soft agent-card--full">
+              <div class="agent-card__avatar">${['M', 'UI', 'OP'][index]}</div>
+              <div class="agent-card__body">
+                <strong>${agent.name}</strong>
+                <p>${agent.role}</p>
+                <div class="agent-card__meta">区域：${agent.area} · 状态：${agent.status}</div>
+                <div class="progress"><span style="width:${agent.load}%"></span></div>
+              </div>
+              <div class="agent-side-meta"><div class="agent-card__load">${agent.load}%</div></div>
+            </article>
+          `).join('')}
+        </div>
+      </article>
+
+      <article class="panel glass-card">
+        <div class="panel__header">
+          <div><h2>下一步重点</h2><p>继续从演示页推进到正式控制台。</p></div></div>
+        <div class="todo-list">
+          <div class="todo-item">接 Gateway 实时健康数据</div>
+          <div class="todo-item">接任务与审批的真实对象模型</div>
+          <div class="todo-item">加协作链路与审批中心页</div>
+        </div>
       </article>
     </section>
   `

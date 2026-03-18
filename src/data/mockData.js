@@ -5,6 +5,13 @@ export const metrics = [
   { label: '待审批', value: '4', hint: '2 项高风险写入', tone: 'danger' },
 ]
 
+export const topStats = [
+  { label: 'Gateway 延迟', value: '84ms' },
+  { label: '上下文压力', value: '68%' },
+  { label: '今日交付', value: '7' },
+  { label: '异常项', value: '2' },
+]
+
 export const pipeline = [
   {
     title: '待澄清',
@@ -79,4 +86,11 @@ export const approvals = [
   { title: '写入共享文档库', level: 'High Risk', owner: 'main' },
   { title: '批量覆盖旧海报素材', level: 'Medium Risk', owner: 'visual-agent' },
   { title: '同步外部数据到工作台', level: 'Review', owner: 'data-agent' },
+]
+
+export const quickActions = [
+  '新建任务',
+  '查看审批',
+  '检查风险',
+  '打开工作台',
 ]
