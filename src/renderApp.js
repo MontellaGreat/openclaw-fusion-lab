@@ -7,7 +7,7 @@ import { renderMissionsPage } from './pages/missionsPage.js'
 import { renderAgentsPage } from './pages/agentsPage.js'
 import { renderUsagePage } from './pages/usagePage.js'
 import { renderWorkspacePage } from './pages/workspacePage.js'
-import { renderApprovalsPage } from './pages/approvalsPage.js'
+import { bindApprovalsPage, renderApprovalsPage } from './pages/approvalsPage.js'
 import { renderCollaborationPage } from './pages/collaborationPage.js'
 import { renderDesignSystemPage } from './pages/designSystemPage.js'
 
@@ -89,6 +89,7 @@ export function renderApp() {
     bindRouteEvents()
     if (activeRoute === 'overview') bindLiveStatus()
     if (activeRoute === 'missions') bindTaskDrawer()
+    if (activeRoute === 'approvals') bindApprovalsPage()
   }
 
   window.addEventListener('hashchange', paint)

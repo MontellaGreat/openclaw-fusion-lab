@@ -1,3 +1,5 @@
+import { setUiState } from './uiState.js'
+
 export function renderTaskDrawer() {
   return `
     <aside class="task-drawer glass-card" id="task-drawer">
@@ -16,15 +18,17 @@ export function renderTaskDrawer() {
         <div class="todo-item">预计交付：<span id="task-drawer-eta">-</span></div>
       </div>
       <div class="hero__actions">
-        <button class="btn btn--primary">标记推进</button>
-        <button class="btn btn--ghost">请求审批</button>
+        <button class="btn btn--primary" data-task-action="advance">标记推进</button>
+        <button class="btn btn--ghost" data-task-action="approval">请求审批</button>
       </div>
+      <div class="inline-feedback" id="task-drawer-feedback"></div>
     </aside>
   `
 }
 
 export function bindTaskDrawer() {
   const drawer = document.querySelector('#task-drawer')
+  const feedback = document.querySelector('#task-drawer-feedback')
   if (!drawer) return
 
   document.querySelectorAll('[data-task]').forEach((card) => {
@@ -36,10 +40,19 @@ export function bindTaskDrawer() {
       document.querySelector('#task-drawer-owner').textContent = card.dataset.taskOwner || '-'
       document.querySelector('#task-drawer-priority').textContent = card.dataset.taskPriority || '-'
       document.querySelector('#task-drawer-eta').textContent = card.dataset.taskEta || '-'
+      feedback.textContent = ''
     })
   })
 
   document.querySelectorAll('[data-close-drawer="task"]').forEach((button) => {
     button.addEventListener('click', () => drawer.classList.remove('is-open'))
+  })
+
+  document.querySelectorAll('[data-task-action]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const action = button.dataset.taskAction
+      setUiState({ taskAction: action })
+      feedback.textContent = action === 'advance' ? '已标记推进（前端交互态）' : '已发起审批请求（前端交互态）'
+    })
   })
 }

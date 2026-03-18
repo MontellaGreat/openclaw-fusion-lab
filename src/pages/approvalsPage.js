@@ -16,7 +16,7 @@ export function renderApprovalsPage() {
         <div class="panel__header">
           <div><h2>待审批列表</h2><p>统一收拢写入、覆盖、同步这类高风险动作。</p></div></div>
           <div class="approval-list">
-            ${approvals.map((item) => `
+            ${approvals.map((item, index) => `
               <div class="approval-item glass-card glass-card--soft approval-item--actionable">
                 <div>
                   <strong>${item.title}</strong>
@@ -24,12 +24,13 @@ export function renderApprovalsPage() {
                 </div>
                 <div class="approval-actions">
                   <span class="tag tag--warn">${item.level}</span>
-                  <button class="quick-action">批准</button>
-                  <button class="quick-action">驳回</button>
+                  <button class="quick-action" data-approval-action="approve" data-approval-index="${index}">批准</button>
+                  <button class="quick-action" data-approval-action="reject" data-approval-index="${index}">驳回</button>
                 </div>
               </div>
             `).join('')}
           </div>
+          <div class="inline-feedback" id="approval-feedback"></div>
       </article>
 
       <article class="panel glass-card">
@@ -47,4 +48,16 @@ export function renderApprovalsPage() {
       </article>
     </section>
   `
+}
+
+export function bindApprovalsPage() {
+  const feedback = document.querySelector('#approval-feedback')
+  if (!feedback) return
+  document.querySelectorAll('[data-approval-action]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const action = button.dataset.approvalAction
+      const label = action === 'approve' ? '已批准（前端交互态）' : '已驳回（前端交互态）'
+      feedback.textContent = label
+    })
+  })
 }

@@ -30,8 +30,7 @@ function getSessions() {
   try {
     const base = '/root/.openclaw/agents/main/sessions'
     if (!fs.existsSync(base)) return []
-    return fs
-      .readdirSync(base)
+    return fs.readdirSync(base)
       .filter((name) => name.endsWith('.jsonl'))
       .map((name) => {
         const full = path.join(base, name)
@@ -45,12 +44,29 @@ function getSessions() {
   }
 }
 
+function getTasks() {
+  return [
+    { id: 'task-1', title: '政府宣传页重构', stage: '待澄清', owner: 'main' },
+    { id: 'task-2', title: '官网落地页设计', stage: '执行中', owner: 'ui-ux-agent' },
+    { id: 'task-3', title: '短片镜头清单', stage: '待交付', owner: 'main' },
+  ]
+}
+
+function getApprovals() {
+  return [
+    { id: 'approval-1', title: '写入共享文档库', owner: 'main', level: 'High Risk' },
+    { id: 'approval-2', title: '覆盖旧海报素材', owner: 'visual-agent', level: 'Medium Risk' },
+  ]
+}
+
 const server = http.createServer((req, res) => {
   if (req.url === '/api/live') {
     const raw = getOpenClawStatusText()
     const payload = {
       status: parseOpenClawStatus(raw),
       sessions: getSessions(),
+      tasks: getTasks(),
+      approvals: getApprovals(),
       now: new Date().toISOString(),
     }
     res.writeHead(200, {
