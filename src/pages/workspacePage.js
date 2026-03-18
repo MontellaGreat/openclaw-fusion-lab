@@ -1,4 +1,5 @@
 import { workspaceDocs } from '../data/mockData.js'
+import { renderEmptyState } from '../components/stateBlocks.js'
 
 export function renderWorkspacePage() {
   return `
@@ -17,7 +18,7 @@ export function renderWorkspacePage() {
           <div><h2>工作台</h2><p>下一步可以接真实文档、记忆检索状态、Agent scoped workspace。</p></div>
         </div>
         <div class="workspace-grid workspace-grid--double">
-          ${workspaceDocs.map((doc) => `
+          ${workspaceDocs.length ? workspaceDocs.map((doc) => `
             <article class="workspace-card glass-card glass-card--soft">
               <div>
                 <strong>${doc.title}</strong>
@@ -25,7 +26,7 @@ export function renderWorkspacePage() {
               </div>
               <span class="tag">${doc.state}</span>
             </article>
-          `).join('')}
+          `).join('') : renderEmptyState('暂无工作台内容', '这里后续会显示真实文档和记忆源。')}
         </div>
       </article>
 

@@ -11,9 +11,11 @@ import { bindApprovalsPage, renderApprovalsPage } from './pages/approvalsPage.js
 import { renderCollaborationPage } from './pages/collaborationPage.js'
 import { renderDesignSystemPage } from './pages/designSystemPage.js'
 import { renderIntegrationPage } from './pages/integrationPage.js'
+import { renderOperationsPage } from './pages/operationsPage.js'
 
 const routes = [
   { id: 'star-office', label: 'Star Office', badge: 'Home', render: renderStarOfficePage },
+  { id: 'operations', label: '运营总览', badge: 'Ops', render: renderOperationsPage },
   { id: 'overview', label: '总览指挥台', badge: 'Live', render: renderOverviewPage },
   { id: 'missions', label: '任务编排', badge: '24', render: renderMissionsPage },
   { id: 'agents', label: 'Agent 运营', badge: '12', render: renderAgentsPage },

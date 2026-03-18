@@ -40,6 +40,11 @@ export function renderAgentsPage() {
       <span class="tag">5 Visible</span>
     </section>
 
+    <section class="hero__actions">
+      <button class="btn btn--primary" data-route-jump="operations">回运营总览</button>
+      <button class="btn btn--ghost" data-route-jump="missions">查看任务编排</button>
+    </section>
+
     <section class="metric-grid">
       <article class="metric-card glass-card"><div class="metric-card__label">真实工作中</div><div class="metric-card__value">${activeAgents.length}</div><div class="metric-card__hint metric-card__hint--up">当前正在消化任务</div></article>
       <article class="metric-card glass-card"><div class="metric-card__label">排队准备中</div><div class="metric-card__value">${queuedAgents.length}</div><div class="metric-card__hint metric-card__hint--warn">有任务但未真正执行</div></article>
