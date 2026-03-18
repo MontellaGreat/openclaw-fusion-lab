@@ -1,4 +1,5 @@
 import { agents, approvals, events, metrics, pipeline } from '../data/mockData.js'
+import { renderLiveStatusBlock } from '../components/liveStatus.js'
 
 export function renderOverviewPage() {
   return `
@@ -34,6 +35,8 @@ export function renderOverviewPage() {
         </article>
       `).join('')}
     </section>
+
+    ${renderLiveStatusBlock()}
 
     <section class="content-grid">
       <article class="panel glass-card panel--wide">

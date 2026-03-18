@@ -1,27 +1,20 @@
 # Deploy Guide
 
-## 当前可用入口
-- 融合控制台预览：`http://180.76.244.94:4174`
-- Star Office 原项目：`http://180.76.244.94:19000`
+## 统一入口
+- HTTP：`http://180.76.244.94/`
+- HTTPS（自签证书）：`https://180.76.244.94/`
 
-## 本地运行
-```bash
-npm install
-npm run dev -- --host 0.0.0.0 --port 4173
-```
+## 路径
+- 融合控制台：`/`
+- Star Office 原项目：`/star-office/`
+- 实时状态接口：`/api/live`
 
-## 生产预览
-```bash
-npm run build
-npm run preview -- --host 0.0.0.0 --port 4174
-```
-
-## 当前部署结构
+## 后端结构
 - `4174`：Vite preview，承载融合控制台
 - `19000`：Star Office 原项目 Flask 服务
+- `4180`：OpenClaw 实时数据桥
+- `80/443`：Nginx 统一入口与反向代理
 
-## 下一步建议
-- 用 Nginx 反向代理统一入口
-- 让 `/` 指向融合控制台
-- 让 `/star-office` 指向 Star Office 原项目
-- 加 HTTPS
+## 当前说明
+- HTTPS 目前为自签证书，因为只有 IP，没有域名，无法签发受信任证书
+- 如果后续提供域名，可替换为正式证书
