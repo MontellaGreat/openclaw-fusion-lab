@@ -1,20 +1,26 @@
 import http from 'node:http'
 import { execSync } from 'node:child_process'
+import fs from 'node:fs'
+import path from 'node:path'
+
+function safeExec(command, cwd = '/root/.openclaw/workspace') {
+  try {
+    return execSync(command, { encoding: 'utf8', cwd, stdio: ['ignore', 'pipe', 'pipe'] })
+  } catch (error) {
+    return String(error?.stdout || error?.stderr || error?.message || error)
+  }
+}
 
 function getOpenClawStatusText() {
-  try {
-    return execSync('openclaw status', { encoding: 'utf8', cwd: '/root/.openclaw/workspace' })
-  } catch (error) {
-    return String(error?.stdout || error?.message || error)
-  }
+  return safeExec('openclaw status')
 }
 
 function parseOpenClawStatus(text) {
   const lines = text.split('\n').map((line) => line.trim()).filter(Boolean)
   const sessionLines = lines.filter((line) => line.includes('agent:'))
   return {
-    live: /status.:.live|status":"live"|OK/i.test(text),
-    hasFeishu: /Feishu\s+│\s+ON\s+│\s+OK/i.test(text) || /Feishu/i.test(text),
+    live: /status.:.live|status":"live"|\blive\b|\bOK\b/i.test(text),
+    hasFeishu: /Feishu/i.test(text),
     sessionCount: sessionLines.length,
     raw: text,
   }
@@ -22,17 +28,18 @@ function parseOpenClawStatus(text) {
 
 function getSessions() {
   try {
-    const text = execSync("python3 - <<'PY'
-import json
-from pathlib import Path
-base=Path('/root/.openclaw/agents/main/sessions')
-items=[]
-if base.exists():
-    for p in sorted(base.glob('*.jsonl'))[-10:]:
-        items.append({'name': p.name, 'size': p.stat().st_size, 'mtime': p.stat().st_mtime})
-print(json.dumps(items, ensure_ascii=False))
-PY", { encoding: 'utf8' })
-    return JSON.parse(text)
+    const base = '/root/.openclaw/agents/main/sessions'
+    if (!fs.existsSync(base)) return []
+    return fs
+      .readdirSync(base)
+      .filter((name) => name.endsWith('.jsonl'))
+      .map((name) => {
+        const full = path.join(base, name)
+        const stat = fs.statSync(full)
+        return { name, size: stat.size, mtime: stat.mtimeMs }
+      })
+      .sort((a, b) => b.mtime - a.mtime)
+      .slice(0, 10)
   } catch {
     return []
   }
@@ -46,11 +53,15 @@ const server = http.createServer((req, res) => {
       sessions: getSessions(),
       now: new Date().toISOString(),
     }
-    res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' })
+    res.writeHead(200, {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Access-Control-Allow-Origin': '*',
+      'Cache-Control': 'no-cache',
+    })
     res.end(JSON.stringify(payload))
     return
   }
-  res.writeHead(404)
+  res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' })
   res.end('Not Found')
 })
 
