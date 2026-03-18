@@ -14,18 +14,22 @@ export function renderAgentsPage() {
     <section class="panel glass-card">
       <div class="panel__header">
         <div><h2>Agent 负载与状态</h2><p>下一步可以补排序、筛选、agent 详情弹层、生命周期操作。</p></div>
+        <div class="filter-row"><span class="tag">All</span><span class="tag">Busy</span><span class="tag">Idle</span></div>
       </div>
       <div class="agent-grid">
         ${agents.map((agent, index) => `
-          <article class="agent-card glass-card glass-card--soft">
-            <div class="agent-card__avatar">${['M', 'UI', 'OP', 'DA'][index]}</div>
+          <article class="agent-card glass-card glass-card--soft agent-card--full">
+            <div class="agent-card__avatar">${['M', 'UI', 'OP', 'DA', 'RV'][index]}</div>
             <div class="agent-card__body">
               <strong>${agent.name}</strong>
               <p>${agent.role}</p>
-              <div class="agent-card__meta">区域：${agent.area} · 状态：${agent.status}</div>
+              <div class="agent-card__meta">区域：${agent.area} · 状态：${agent.status} · 评分：${agent.score}</div>
               <div class="progress"><span style="width:${agent.load}%"></span></div>
             </div>
-            <div class="agent-card__load">${agent.load}%</div>
+            <div class="agent-side-meta">
+              <div class="agent-card__load">${agent.load}%</div>
+              <div class="agent-side-meta__sub">${agent.tasks} Tasks</div>
+            </div>
           </article>
         `).join('')}
       </div>

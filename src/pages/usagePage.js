@@ -1,4 +1,4 @@
-import { metrics, usageBars } from '../data/mockData.js'
+import { metrics, usageBars, usageBreakdown } from '../data/mockData.js'
 
 export function renderUsagePage() {
   return `
@@ -21,15 +21,43 @@ export function renderUsagePage() {
       `).join('')}
     </section>
 
-    <section class="panel glass-card">
-      <div class="panel__header">
-        <div><h2>Token 趋势</h2><p>下一步可以补热力图、时间范围切换、成本折线和上下文压力模块。</p></div>
-      </div>
-      <div class="usage-bars">
-        ${usageBars.map((value, index) => `
-          <div class="usage-bar" style="height:${value}%"><span>${String(index + 1).padStart(2, '0')}</span></div>
-        `).join('')}
-      </div>
+    <section class="content-grid">
+      <article class="panel glass-card panel--wide">
+        <div class="panel__header">
+          <div><h2>Token 趋势</h2><p>下一步可以补热力图、范围切换、成本折线和上下文压力模块。</p></div>
+        </div>
+        <div class="usage-bars">
+          ${usageBars.map((value, index) => `
+            <div class="usage-bar" style="height:${value}%"><span>${String(index + 1).padStart(2, '0')}</span></div>
+          `).join('')}
+        </div>
+      </article>
+
+      <article class="panel-stack">
+        <section class="panel glass-card">
+          <div class="panel__header">
+            <div><h2>消耗构成</h2><p>把大头先看清，后面才好控。</p></div>
+          </div>
+          <div class="breakdown-list">
+            ${usageBreakdown.map((item) => `
+              <div class="breakdown-item glass-card glass-card--soft">
+                <strong>${item.label}</strong>
+                <span>${item.value}</span>
+              </div>
+            `).join('')}
+          </div>
+        </section>
+        <section class="panel glass-card">
+          <div class="panel__header">
+            <div><h2>运营建议</h2><p>根据当前压力给出动作建议。</p></div>
+          </div>
+          <div class="todo-list">
+            <div class="todo-item">视频生成任务建议拆分成 2 批执行</div>
+            <div class="todo-item">高消耗任务优先安排在低峰时段</div>
+            <div class="todo-item">把大文档整理拆为摘要 + 深读两段流程</div>
+          </div>
+        </section>
+      </article>
     </section>
   `
 }
