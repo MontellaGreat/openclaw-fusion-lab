@@ -10,6 +10,7 @@ import { renderWorkspacePage } from './pages/workspacePage.js'
 import { bindApprovalsPage, renderApprovalsPage } from './pages/approvalsPage.js'
 import { renderCollaborationPage } from './pages/collaborationPage.js'
 import { renderDesignSystemPage } from './pages/designSystemPage.js'
+import { renderIntegrationPage } from './pages/integrationPage.js'
 
 const routes = [
   { id: 'star-office', label: 'Star Office', badge: 'Home', render: renderStarOfficePage },
@@ -21,6 +22,7 @@ const routes = [
   { id: 'collaboration', label: '协作链路', badge: '9', render: renderCollaborationPage },
   { id: 'workspace', label: '工作台', badge: 'Docs', render: renderWorkspacePage },
   { id: 'design-system', label: '设计系统', badge: 'UX', render: renderDesignSystemPage },
+  { id: 'integration', label: '接线研究', badge: 'Data', render: renderIntegrationPage },
 ]
 
 function getRoute() {
