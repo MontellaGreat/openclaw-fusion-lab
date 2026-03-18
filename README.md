@@ -1,16 +1,31 @@
 # OpenClaw Fusion Lab
 
-融合多个 OpenClaw 控制台 / 任务编排 / 可视化面板项目的优点，做一个更完整、更高级的 Agent 控制中心。
+默认融合版 OpenClaw 控制中心前端原型。
 
-## 当前内容
+## 当前方向
+- 只保留默认融合版
+- 视觉语言统一为玻璃拟态风
+- 目标是继续演进成真实可用的控制中心前端
+
+## 已完成
 - `docs/feature-summary.md`：5 个参考项目功能总结与融合建议
-- `concepts/fusion-default.html`：融合版默认风格
-- `concepts/fusion-apple.html`：苹果风版本
-- `concepts/fusion-linear.html`：Linear 风版本
+- `src/renderApp.js`：默认融合版首页结构
+- `src/style.css`：玻璃拟态设计系统基础样式
+- `index.html`：Vite 入口页
 
-## 参考项目
-- TianyiDataScience/openclaw-control-center
-- sunxi1993-a11y/AgentTeamsBI
-- abhi1693/openclaw-mission-control
-- crshdn/mission-control
-- ringhyacinth/Star-Office-UI
+## 运行
+```bash
+npm install
+npm run dev
+```
+
+## 构建
+```bash
+npm run build
+```
+
+## 下一步
+- 增加多页面结构
+- 补 Mission / Agents / Usage / Workspace 页面
+- 接入模拟数据层
+- 再接真实 OpenClaw / Gateway 数据
