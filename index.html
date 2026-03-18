@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenClaw Fusion Lab</title>
+  <style>
+    body{margin:0;font-family:Inter,"PingFang SC",sans-serif;background:#0b1020;color:#eef2ff;padding:32px;background-image:radial-gradient(circle at top left,rgba(96,165,250,.18),transparent 25%),radial-gradient(circle at top right,rgba(139,92,246,.16),transparent 22%)}
+    .wrap{max-width:1100px;margin:0 auto}.hero,.card{background:rgba(15,23,42,.78);border:1px solid rgba(148,163,184,.12);border-radius:24px;backdrop-filter:blur(16px);box-shadow:0 20px 50px rgba(0,0,0,.28)}.hero{padding:28px;margin-bottom:18px}.hero h1{margin:0 0 10px;font-size:40px}.hero p{color:#aebad4;line-height:1.8;max-width:840px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.card{padding:22px}.card h2{margin:0 0 10px;font-size:22px}.card p{color:#aebad4;line-height:1.7}.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.btn{display:inline-block;padding:11px 14px;border-radius:14px;background:linear-gradient(135deg,#60a5fa,#22d3ee);color:#08111f;text-decoration:none;font-weight:700}.btn.secondary{background:rgba(255,255,255,.08);color:#eef2ff;border:1px solid rgba(255,255,255,.08)}@media(max-width:900px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>OpenClaw Fusion Lab</h1>
+      <p>这里整理了 5 个参考项目的功能清单，并做了 3 套融合方向：默认融合版、苹果风、Linear 风。你可以先看方向，再决定我下一步是继续做 React 项目、设计系统，还是直接接真数据。</p>
+      <div class="btns">
+        <a class="btn" href="docs/feature-summary.md">看功能总结</a>
+        <a class="btn secondary" href="README.md">看项目说明</a>
+      </div>
+    </section>
+    <section class="grid">
+      <div class="card">
+        <h2>默认融合版</h2>
+        <p>把 control center、mission flow、agent BI 和 star office 的能力做成一套正式产品风格。</p>
+        <div class="btns"><a class="btn" href="concepts/fusion-default.html">打开页面</a></div>
+      </div>
+      <div class="card">
+        <h2>苹果风</h2>
+        <p>更轻、更干净、更有高级软件质感，适合演示、提案、品牌呈现。</p>
+        <div class="btns"><a class="btn" href="concepts/fusion-apple.html">打开页面</a></div>
+      </div>
+      <div class="card">
+        <h2>Linear 风</h2>
+        <p>更理性、更适合长期使用，强调结构、流程和任务驱动。</p>
+        <div class="btns"><a class="btn" href="concepts/fusion-linear.html">打开页面</a></div>
+      </div>
+      <div class="card">
+        <h2>下一步建议</h2>
+        <p>如果方向对，我下一步建议直接把你选中的一版升级成 React / Next.js 多页面项目。</p>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

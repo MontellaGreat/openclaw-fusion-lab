@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fusion Linear Style</title>
+  <style>
+    :root{--bg:#0b0d12;--panel:#11141b;--panel2:#151922;--line:#232838;--text:#f3f4f6;--muted:#9ca3af;--purple:#8b5cf6;--blue:#60a5fa;--green:#34d399;--amber:#fbbf24;--radius:20px}
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,"PingFang SC",sans-serif;background:var(--bg);color:var(--text)}.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.side{border-right:1px solid var(--line);padding:20px;background:#0f1218}.brand{font-weight:700;margin-bottom:24px}.nav{display:grid;gap:8px}.nav div{padding:10px 12px;border-radius:12px;color:var(--muted)}.nav .on{background:#171b24;color:var(--text);border:1px solid #252b38}.main{padding:22px;display:grid;gap:16px}.hero,.grid>div,.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}.hero,.grid>div,.panel{padding:18px}.hero h1{margin:0;font-size:34px;letter-spacing:-.03em}.hero p{color:var(--muted);max-width:860px;line-height:1.7}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.v{font-size:28px;font-weight:700;margin:10px 0 4px}.m{font-size:13px;color:var(--muted)}.split{display:grid;grid-template-columns:1.55fr 1fr;gap:14px}.top{display:flex;justify-content:space-between;align-items:center}.badge{padding:5px 9px;border-radius:999px;background:#171b24;border:1px solid #282f3d;font-size:12px;color:#c8cfdb}.board{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.col{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:12px}.ticket{background:#0f1218;border:1px solid #252b38;border-radius:14px;padding:12px;margin-top:10px}.ticket strong{display:block;margin-bottom:6px}.feed{display:grid;gap:10px;margin-top:14px}.event{display:flex;justify-content:space-between;gap:12px;padding:12px;border-radius:14px;background:var(--panel2);border:1px solid var(--line)}.agents{display:grid;gap:10px;margin-top:14px}.agent{display:grid;grid-template-columns:40px 1fr auto;gap:10px;align-items:center;padding:12px;border-radius:14px;background:var(--panel2);border:1px solid var(--line)}.avatar{width:40px;height:40px;border-radius:12px;background:#1f2430;display:grid;place-items:center;font-weight:700;color:#cbd5e1}.progress{height:8px;background:#1f2430;border-radius:999px;overflow:hidden;margin-top:8px}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--purple),var(--blue))}@media(max-width:1100px){.app{grid-template-columns:1fr}.grid,.split,.board{grid-template-columns:1fr}.side{display:none}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand">Fusion / Linear Mode</div>
+    <div class="nav">
+      <div class="on">Overview</div>
+      <div>Mission Queue</div>
+      <div>Agents</div>
+      <div>Approvals</div>
+      <div>Usage</div>
+      <div>Workspace</div>
+    </div>
+  </aside>
+  <main class="main">
+    <section class="hero">
+      <div class="badge">Linear Style / 更理性、更长期可用</div>
+      <h1>更像真正的团队操作系统，而不是一张炫技大屏。</h1>
+      <p>这版更适合长期用：结构克制、层级硬朗、状态明确、任务驱动感更强。适合真的拿来做产品，而不是只做展示稿。</p>
+    </section>
+    <section class="grid">
+      <div><div class="m">Active Agents</div><div class="v">14</div><div class="m">3 个高负载</div></div>
+      <div><div class="m">Active Missions</div><div class="v">31</div><div class="m">9 个处于执行中</div></div>
+      <div><div class="m">Approvals</div><div class="v">4</div><div class="m">2 个阻塞主流程</div></div>
+      <div><div class="m">Context Pressure</div><div class="v">68%</div><div class="m">接近需要切分</div></div>
+    </section>
+    <section class="split">
+      <div class="panel">
+        <div class="top"><strong>Mission Queue</strong><span class="badge">7-stage system</span></div>
+        <div class="board">
+          <div class="col"><strong>Inbox</strong><div class="ticket"><strong>政府合作专题页</strong><div class="m">等待信息补全</div></div></div>
+          <div class="col"><strong>Assigned</strong><div class="ticket"><strong>公众号改版</strong><div class="m">已分配 UI Agent</div></div></div>
+          <div class="col"><strong>In Progress</strong><div class="ticket"><strong>官网视觉升级</strong><div class="m">主框架已完成</div></div></div>
+          <div class="col"><strong>Review</strong><div class="ticket"><strong>投标资料整理</strong><div class="m">等待人工确认</div></div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="top"><strong>Live Feed</strong><span class="badge">Realtime</span></div>
+        <div class="feed">
+          <div class="event"><span>main → ui-agent 派发招商页重构</span><span class="m">1m</span></div>
+          <div class="event"><span>review-agent 请求审批高风险写操作</span><span class="m">6m</span></div>
+          <div class="event"><span>office-space 更新：设计 Agent 进入工作区</span><span class="m">9m</span></div>
+        </div>
+      </div>
+    </section>
+    <section class="panel">
+      <div class="top"><strong>Agents</strong><span class="badge">Workload</span></div>
+      <div class="agents">
+        <div class="agent"><div class="avatar">M</div><div><strong>Main Agent</strong><div class="m">Governance / Review</div><div class="progress"><i style="width:79%"></i></div></div><div>79%</div></div>
+        <div class="agent"><div class="avatar">U</div><div><strong>UI Agent</strong><div class="m">Design / Components</div><div class="progress"><i style="width:66%"></i></div></div><div>66%</div></div>
+        <div class="agent"><div class="avatar">S</div><div><strong>Space Agent</strong><div class="m">Star Office 状态同步</div><div class="progress"><i style="width:34%"></i></div></div><div>34%</div></div>
+      </div>
+    </section>
+  </main>
+</div>
+</body>
+</html>
